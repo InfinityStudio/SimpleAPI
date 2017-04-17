@@ -4,6 +4,8 @@
 `type`: The type of the item. See [Types And Properties](###Types And Properties).
  
 `creativeTab`: The creative tab of this item.
+
+View [Sample](sample/README.md)
  
 ## Types And Properties
 `stack`: Indicates that this is a common stack of items. 
