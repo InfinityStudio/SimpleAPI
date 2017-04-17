@@ -101,10 +101,10 @@ public class ModComponentBatch
 		String type = MCJsonUtil.getString(object, "type", "stack");
 		if (type.equals("stack"))
 			return handleStack(object, new ItemAdapterBase())
-					.setCapabilityFactory(CapabilityBinding.INSTANCE.createCapabilitesFactory(object.get("capabilities")));
+					.setCapabilityFactory(CapabilityBinding.INSTANCE.createCapabilitiesFactory(object.get("capabilities")));
 		else if (type.equals("consumable"))
 			return handleConsume(object, new ItemAdapterBase())
-					.setCapabilityFactory(CapabilityBinding.INSTANCE.createCapabilitesFactory(object.get("capabilities")));
+					.setCapabilityFactory(CapabilityBinding.INSTANCE.createCapabilitiesFactory(object.get("capabilities")));
 		else if (type.equals("tool"))
 			return new ItemToolAdapter(ofNullable(object.get("attackDamage")).map(JsonElement::getAsFloat).orElse
 					(0F),
@@ -120,13 +120,13 @@ public class ModComponentBatch
 							if (jsonElement.isJsonPrimitive())
 								blockSet.add(Block.getBlockFromName(jsonElement.getAsString()));
 						return blockSet;
-					}).orElse(Collections.emptySet())).setCapabilityFactory(CapabilityBinding.INSTANCE.createCapabilitesFactory(object.get("capabilities")));
+					}).orElse(Collections.emptySet())).setCapabilityFactory(CapabilityBinding.INSTANCE.createCapabilitiesFactory(object.get("capabilities")));
 		else if (type.equals("food"))
 			return handleStack(object, new ItemFoodAdapter(
 					ofNullable(object.get("healAmount")).map(JsonElement::getAsInt).orElse(0),
 					ofNullable(object.get("saturation")).map(JsonElement::getAsFloat).orElse(0F),
 					ofNullable(object.get("isWolfFood")).map(JsonElement::getAsBoolean).orElse(false)
-			)).setCapabilityFactory(CapabilityBinding.INSTANCE.createCapabilitesFactory(object.get("capabilities")));
+			)).setCapabilityFactory(CapabilityBinding.INSTANCE.createCapabilitiesFactory(object.get("capabilities")));
 		return null;
 	}
 

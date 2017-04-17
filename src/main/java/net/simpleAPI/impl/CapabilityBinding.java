@@ -25,7 +25,7 @@ public enum CapabilityBinding
 {
 	INSTANCE;
 
-	public Function<ICapabilityProvider, Map<ResourceLocation, ICapabilityProvider>> createCapabilitesFactory
+	public Function<ICapabilityProvider, Map<ResourceLocation, ICapabilityProvider>> createCapabilitiesFactory
 			(JsonElement capabilities)
 	{
 		if (capabilities == null) return null;

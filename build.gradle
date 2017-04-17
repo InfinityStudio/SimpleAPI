@@ -22,10 +22,8 @@ plugins {
 }
 */
 version = "1.0"
-group= "net.cijhn" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group= "org.infstudio" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "simpleAPI"
-
-
 
 minecraft {
     version = "1.11.2-13.20.0.2228"

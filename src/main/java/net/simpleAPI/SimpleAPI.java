@@ -1,11 +1,14 @@
 package net.simpleAPI;
 
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.simpleAPI.impl.ModComponentBatch;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 import java.io.File;
+import java.util.Arrays;
 
 /**
  * @author ci010
@@ -21,9 +24,16 @@ public class SimpleAPI
 			"}";
 
 	@Mod.EventHandler
+	public void pre(FMLPreInitializationEvent event)
+	{
+
+	}
+
+	@Mod.EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		ModComponentBatch batch = new ModComponentBatch("simple_api", Side.CLIENT);
+//		ModComponentBatch batch = new ModComponentBatch(Side.CLIENT);
+
 //		File mcDir = Loader.instance().getConfigDir().getParentFile();
 //		File defines = new File(mcDir, "defines");
 //
