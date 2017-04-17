@@ -1,7 +1,7 @@
 ## Item Json API
 `id`: The id of the item, should be identical.
 
-`type`: The type of the item. See [Types And Properties](#Creative Tabs).
+`type`: The type of the item. See [Types And Properties](#creative-tabs).
  
 `creativeTab`: The creative tab of this item.
 
