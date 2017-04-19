@@ -1,16 +1,14 @@
 ## Item Json API
 `id`: The id of the item, should be identical.
 
-`type`: The type of the item. See [Types And Properties](#creative-tabs).
+`type`: The type of the item. See [Types And Properties](#types-and-properties).
  
 `creativeTab`: The creative tab of this item.
-
-View [Sample](sample/README.md)
  
 ## Types And Properties
 `stack`: Indicates that this is a common stack of items. 
  * `maxStackSize`: The max stackable size of this item.	
- * `maxMeta`: The max meta type of this item. Used for same item different icon.
+ * `subTypes`: The JSONArray that containing the all item subtypes' id.
 
 `consumable`: Indicates that this is a no-stackable but consumable item.
  * `maxDamage`: The max durability of this item. 
