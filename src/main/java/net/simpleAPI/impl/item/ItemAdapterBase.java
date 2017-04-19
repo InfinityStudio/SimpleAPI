@@ -126,6 +126,31 @@ public class ItemAdapterBase extends Item implements ItemAdapter
 		return this;
 	}
 
+	private String[] subTypeArr;
+
+	@Override
+	public String[] getSubTypes()
+	{
+		return subTypeArr;
+	}
+
+	@Override
+	public ItemAdapter setSubTypes(String[] subTypes)
+	{
+		Preconditions.checkNotNull(subTypes);
+		this.hasSubtypes = true;
+		this.subTypeArr = subTypes;
+		return this;
+	}
+
+	public String getUnlocalizedName(ItemStack stack)
+	{
+		if (hasSubtypes)
+			return "item." + getUnlocalizedName() + "." + getSubTypes()[stack.getMetadata()];
+		else
+			return super.getUnlocalizedName(stack);
+	}
+
 	@Override
 	public int getMetadata(int damage) {return this.hasSubtypes ? damage : 0;}
 

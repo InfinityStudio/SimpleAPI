@@ -43,4 +43,8 @@ public interface ItemAdapter
 	ItemAdapter setCreate(ItemCreate create);
 
 	ItemAdapter setDestroy(ItemBlockDestroy destroy);
+
+	ItemAdapter setSubTypes(String[] subTypes);
+
+	String[] getSubTypes();
 }

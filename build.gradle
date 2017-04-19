@@ -1,4 +1,4 @@
-
+apply from: 'helper.gradle'
 // For those who want the bleeding edge
 buildscript {
     repositories {
@@ -21,9 +21,11 @@ plugins {
     id "net.minecraftforge.gradle.forge" version "2.0.2"
 }
 */
+
+def modid = 'simple_api'
 version = "1.0"
-group= "org.infstudio" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "simpleAPI"
+group = "org.infstudio" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "SimpleAPI"
 
 minecraft {
     version = "1.11.2-13.20.0.2228"
@@ -62,22 +64,21 @@ dependencies {
 
 }
 
-processResources
-        {
-            // this will ensure that this task is redone when the versions change.
-            inputs.property "version", project.version
-            inputs.property "mcversion", project.minecraft.version
+processResources {
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
 
-            // replace stuff in mcmod.info, nothing else
-            from(sourceSets.main.resources.srcDirs) {
-                include 'mcmod.info'
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
 
-                // replace version and mcversion
-                expand 'version':project.version, 'mcversion':project.minecraft.version
-            }
+        // replace version and mcversion
+        expand 'version': project.version, 'mcversion': project.minecraft.version
+    }
 
-            // copy everything else, thats not the mcmod.info
-            from(sourceSets.main.resources.srcDirs) {
-                exclude 'mcmod.info'
-            }
-        }
+    // copy everything else, thats not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}

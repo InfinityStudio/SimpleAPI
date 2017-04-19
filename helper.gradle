@@ -1,0 +1,193 @@
+import groovy.json.*
+
+def assets = new File('src/main/resources/assets/')
+def modinfo = new File(assets, 'mcmod.info')
+
+task checkAssets {
+    doLast {
+        if (!modinfo.exists()) tasks.generateModInfo.execute()
+        println 'Generating textures'
+        def json = new JsonSlurper().parseText(modinfo.text)
+
+        def modList
+        if (json instanceof List)
+            modList = json
+        else modList = [json]
+
+        for (def mod : modList) {
+            def modid = mod.modid
+            if (modid == null || !modid instanceof String) {
+                println 'Cannot find modid in mcmod.info, Skip!'
+                continue
+            }
+
+            def modroot = new File(assets, modid)
+            if (!modroot.exists() || modroot.isFile()) modroot.mkdir()
+            def defs = new File(modroot, 'defs')
+            if (!defs.exists() || defs.isFile()) defs.mkdirs()
+
+            def bDir = new File(defs, 'blocks')
+            if (!bDir.exists()) bDir.mkdirs()
+            def blocks = resolveBlocks(bDir)
+            def iDir = new File(defs, 'items')
+            if (!iDir.exists()) iDir.mkdirs()
+            def items = resolveItems(iDir)
+
+            if (blocks != null && !blocks.isEmpty())
+                checkBlockState(modid, blocks, new File(modroot, 'blockstates'))
+            if (items != null && !items.isEmpty())
+                checkItemModel(modid, items, new File(modroot, 'models/item'))
+        }
+    }
+}
+
+def resolveItems(dir, itemList = []) {
+    println 'resolving ' + dir.getAbsolutePath()
+    if (!dir.exists() || dir.isFile()) return itemList
+    def files = dir.listFiles()
+    if (files == null) return itemList
+
+    for (def file : files) {
+        println 'resolving ' + file.getAbsolutePath()
+        if (file.isDirectory()) {
+            resolveItems(dir, itemList)
+            continue
+        }
+        def jsonContent = file.text
+        if (jsonContent == null || !(jsonContent instanceof String) || jsonContent.isEmpty()) continue
+        def json = new JsonSlurper().parseText(jsonContent)
+        for (def item : json) {
+            def id = item.id
+            def meta = 0
+            if (item.type == 'stack') meta = item.subTypes
+            itemList.add([id: id, meta: meta])
+        }
+    }
+    return itemList
+}
+
+
+def checkItemModel(modid, items, dir) {
+    if (!dir.exists()) dir.mkdirs()
+    for (def item : items) {
+        System.out.println('checking model ' + modid + ':' + item)
+        def subTypes = [item.id]
+        subTypes.add(item.meta)
+        for (int i = 0; i < subTypes.size(); i++) {
+            def realName = i > 1 ? item + '_' + subTypes[i] : item.id
+            def modelFile = new File(realName + '.json')
+            def model
+            if (!modelFile.exists()) {
+                def txt = JsonOutput.prettyPrint(
+                        JsonOutput.toJson([parent: "item/generated", textures: [layer0: modid + ':items/' + realName]]))
+                new File(dir, realName + '.json').text = txt
+                model = new JsonSlurper().parseText(txt)
+            } else
+                model = new JsonSlurper().parseText(modelFile.text)
+            def texture = model.textures
+            if (texture == null) return
+            for (def texLoc : texture)
+                checkTexture modid, texLoc.value.substring(texLoc.value.indexOf(':') + 1)
+        }
+    }
+}
+
+def resolveBlocks(dir, blockList = []) {
+    if (!dir.exists() || dir.isFile()) return blockList
+    def files = dir.listFiles()
+    if (files == null) return blockList
+    for (def f : files) {
+        if (f.isDirectory()) {
+            resolveBlocks(dir, blockList)
+            continue
+        }
+        def jsonContent = f.text
+        if (jsonContent == null || !(jsonContent instanceof String) || jsonContent.isEmpty()) continue
+        def json = new JsonSlurper().parseText(jsonContent)
+        for (def block : json) {
+            blockList.add(block.id)
+        }
+    }
+    return blockList
+}
+
+def checkBlockState(modid, blocks, dir) {
+    for (def block : blocks) {
+        def blockState = new File(dir, block + '.json')
+        if (!blockState.exists()) blockState.text = '{\n' +
+                '    "variants": {\n' +
+                '        "normal": { "model":' + block + '}\n' +
+                '    }\n' +
+                '}'
+        state = new JsonSlurper().parseText(blockState.text)
+        for (def entry : state.variants)
+            checkBlockModel(modid, entry.model, new File(assets, modid + '/models/block'))
+    }
+}
+
+def checkBlockModel(modid, block, dir) {
+    blockModelFile = new File(dir, block)
+    if (!blockModelFile.exists()) blockModelFile.text = '{\n' +
+            '    "parent": "block/cube_all",\n' +
+            '    "textures": {\n' +
+            '        "all": blocks/' + block + '\n' +
+            '    }\n' +
+            '}'
+    model = new JsonSlurper().parseText(blockModelFile.text)
+    for (def tex : model.textures)
+        checkTexture modid, tex.value
+}
+
+def checkTexture(modid, loc) {
+    println 'checking texture ' + modid + ':' + loc
+    println loc
+    def missing
+    def dir = new File('src/main/resources/assets/' + modid + '/textures')
+    def file = new File(dir, loc + '.png')
+    file.getParentFile().mkdirs()
+    if (!file.exists())
+        new File(dir, loc + '.png.missing').createNewFile()
+    else if ((missing = new File(dir, loc + '.png.missing')).exists())
+        missing.delete()
+}
+
+
+task generateModInfo {
+    doLast {
+        println 'generating template mcmod.info'
+        def dir = new File('src/main/resources/assets/')
+        def info = new File(dir, 'mcmod.info')
+        if (info.exists())
+            println 'mcmod.info already exist!'
+        else {
+            def p = project.getProject()
+            def modid = p.findProperty('modid')
+            def infoObj = [[
+                                   modid                   : modid == null ? archivesBaseName.toLowerCase() : modid,
+                                   name                    : p.hasProperty('name') ? archivesBaseName : p.findProperty('name'),
+                                   description             : p.hasProperty('description') ? archivesBaseName : p.findProperty('description'),
+                                   mcversion               : minecraft.version,
+                                   version                 : version,
+                                   url                     : !project.hasProperty('url') ? "" : p.findProperty('url'),
+                                   updateUrl               : !project.hasProperty('updateUrl') ? "" : p.findProperty
+                                           ('updateUrl'),
+                                   authorList              : [],
+                                   credits                 : project.group.toString(),
+                                   logoFile                : "",
+                                   screenshots             : [],
+                                   parent                  : "",
+                                   requiredMods            : ["Forge-" + minecraft.version],
+                                   dependencies            : [],
+                                   dependants              : [],
+                                   useDependencyInformation: true,
+                                   items                   : [],
+                                   blocks                  : [],
+                                   entities                : []
+                           ]
+            ]
+            def json = JsonOutput.prettyPrint(JsonOutput.toJson(infoObj))
+            dir.mkdirs()
+            info.write(json)
+        }
+    }
+}

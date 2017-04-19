@@ -5,6 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import net.simpleAPI.impl.item.ItemAdapter;
 
 /**
  * @author ci010
@@ -12,7 +13,7 @@ import net.minecraftforge.oredict.OreDictionary;
 public class RegItem extends RegComponent<Item>
 {
 	private String ore;
-	private int subTypes;
+	private String[] subTypes;
 
 	public RegItem(Item component)
 	{
@@ -25,7 +26,7 @@ public class RegItem extends RegComponent<Item>
 		return this;
 	}
 
-	public RegItem setSubTypes(int subTypes)
+	public RegItem setSubTypes(String[] subTypes)
 	{
 		this.subTypes = subTypes;
 		return this;
@@ -45,9 +46,12 @@ public class RegItem extends RegComponent<Item>
 			ModelLoader.setCustomModelResourceLocation(getComponent(), 0,
 					new ModelResourceLocation(getComponent().getRegistryName(),
 							"inventory"));
-		else for (int i = 0; i < subTypes; i++)
-			ModelLoader.setCustomModelResourceLocation(getComponent(), 1,
-					new ModelResourceLocation(getComponent().getRegistryName(),
-							"inventory"));
+		else for (int i = 0; i < subTypes.length; i++)
+		{
+			Item component = getComponent();
+			String id = component.getRegistryName() + "_" + subTypes[i];
+			ModelLoader.setCustomModelResourceLocation(component, i,
+					new ModelResourceLocation(id, "inventory"));
+		}
 	}
 }

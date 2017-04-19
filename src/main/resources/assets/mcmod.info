@@ -1,0 +1,39 @@
+[
+    {
+        "modid": "simpleapi",
+        "name": "SimpleAPI",
+        "description": "SimpleAPI",
+        "mcversion": "1.11.2",
+        "version": "1.0",
+        "url": "",
+        "updateUrl": "",
+        "authorList": [
+            
+        ],
+        "credits": "org.infstudio",
+        "logoFile": "",
+        "screenshots": [
+            
+        ],
+        "parent": "",
+        "requiredMods": [
+            "Forge-1.11.2"
+        ],
+        "dependencies": [
+            
+        ],
+        "dependants": [
+            
+        ],
+        "useDependencyInformation": true,
+        "items": [
+            
+        ],
+        "blocks": [
+            
+        ],
+        "entities": [
+            
+        ]
+    }
+]
