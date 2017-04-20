@@ -1,0 +1,74 @@
+[
+  {
+	"id": "test_id",
+	"states": {
+	  "face": "direction",
+	  "lit": {
+		"type": "boolean",
+		"if": {
+		  "true": {
+			"lightValue": 2
+		  },
+		  "false": {
+			"lightValue": 0
+		  }
+		}
+	  },
+	  "some_int_type": 3
+	},
+	"resistance": 100,
+	"hardness": 0.2,
+	"material": "ROCK",
+	"renderType": "MODEL",
+	"mapColor": "WHITE",
+	"isFullCube": true,
+	"isFullBlock": true,
+	"isOpaqueCube": true,
+	"flammability": 10,
+	"fireSeparateSpeed": 10,
+	"isFireSource": true,
+	"lightOpacity": 10,
+	"lightValue": 10,
+	"boundingBox": [[0, 0, 0], [1, 1, 1]],
+	"capabilities": [
+	  {
+		"name": "modid:org.any.attr",
+		"type": "org.whatever.AttributeView",
+		"store": "true",
+		"construct": {
+		  "progress": {
+			"type": "number",
+			"mode": "lazy"
+		  },
+		  "fireType": {
+			"type": "net.whatever.EnumClass"
+		  }
+		}
+	  },
+	  {
+		"name": "modid:res.location.inv",
+		"type": "org.whatever.Inventory",
+		"store": "true",
+		"nbt": {
+		  "__init__": {
+			"container": {
+			  "size": 4,
+			  "rule": {
+				"stackLimit": 32,
+				"canPlace": true,
+				"validItems": [
+				  "minecraft:coal",
+				  "$material:wood"
+				],
+				"invalidItems": []
+			  }
+			},
+			"fuel": {
+			  "rule": "rule.resourceLocation"
+			}
+		  }
+		}
+	  }
+	]
+  }
+]

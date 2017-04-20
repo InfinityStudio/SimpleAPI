@@ -3,7 +3,58 @@ import groovy.json.*
 def assets = new File('src/main/resources/assets/')
 def modinfo = new File(assets, 'mcmod.info')
 
+task genMusic {
+    group = 'helper'
+    doLast {
+        def dirs = assets.listFiles()
+        if (dirs == null) return
+        def reader = new JsonSlurper()
+        for (def dir : dirs) {
+            def soundDir = new File(dir, 'sounds')
+            def sounds = new File(dir, 'sound.json')
+            if (!soundDir.exists()) continue
+            def ls = []
+            discoverSounds(soundDir, ls)
+            def p = soundDir.toPath()
+            def info
+            if (sounds.exists() && sounds.isFile())
+                info = reader.parseText(sounds.text)
+            else info = new TreeMap()
+            for (def fp : ls) {
+                def rela = p.relativize(fp)
+                def path = rela.toString()
+                path = path.substring(0, path.lastIndexOf('.'))
+                def name = path.replace('/', '.')
+                if (!info.containsKey(name))
+                    info.put(name, [
+                            category: 'player',
+                            sounds  : [[name: path, stream: true]]
+                    ])
+            }
+            if (info.isEmpty()) continue
+            sounds.text = JsonOutput.prettyPrint(JsonOutput.toJson(info))
+        }
+    }
+}
+
+def discoverSounds(dir, ls) {
+    File[] musics = dir.listFiles(new FileFilter()
+    {
+        boolean accept(File pathname) {
+            if (pathname.isDirectory()) {
+                discoverSounds(pathname, ls)
+                return false
+            }
+            return pathname.getName().endsWith(".ogg")
+        }
+    })
+    if (musics != null && musics.length != 0)
+        for (def music : musics)
+            ls.add(music.toPath())
+}
+
 task checkAssets {
+    group = 'helper'
     doLast {
         if (!modinfo.exists()) tasks.generateModInfo.execute()
         println 'Generating textures'
@@ -152,7 +203,8 @@ def checkTexture(modid, loc) {
 }
 
 
-task generateModInfo {
+task genModInfo {
+    group = 'helper'
     doLast {
         println 'generating template mcmod.info'
         def dir = new File('src/main/resources/assets/')
@@ -162,6 +214,7 @@ task generateModInfo {
         else {
             def p = project.getProject()
             def modid = p.findProperty('modid')
+
             def infoObj = [[
                                    modid                   : modid == null ? archivesBaseName.toLowerCase() : modid,
                                    name                    : p.hasProperty('name') ? archivesBaseName : p.findProperty('name'),

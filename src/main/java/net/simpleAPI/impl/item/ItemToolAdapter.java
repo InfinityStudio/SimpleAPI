@@ -125,6 +125,18 @@ public class ItemToolAdapter extends ItemTool implements ItemAdapter
 	}
 
 	@Override
+	public ItemAdapter setSubTypes(String[] subTypes)
+	{
+		return null;
+	}
+
+	@Override
+	public String[] getSubTypes()
+	{
+		return new String[0];
+	}
+
+	@Override
 	public int getMetadata(int damage) {return this.hasSubtypes ? damage : 0;}
 
 	@Override
