@@ -15,4 +15,15 @@ For `Entity`, it goes `entities` sub-folder: `assets/modid/defs/entities`
 All the JSON contained by these 3 folders above, will be loaded into Minecraft.
 
 ## API details
-[Items](Item.md)
+All the JSON files in definition folder, should be a JSONArray looked like:
+````
+[
+	{component-definition-a},
+	{component-definition-b}
+	...
+]
+````
+
+Each component definition should have a property `id` which is unique to others.
+
+[Component definition for items](Item.md) 

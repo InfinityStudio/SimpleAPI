@@ -63,20 +63,13 @@ public class ItemFoodAdapter extends ItemFood implements ItemAdapter
 
 	@Override
 	public ItemFoodAdapter setCapabilityFactory(Function<ICapabilityProvider, Map<ResourceLocation, ICapabilityProvider>>
-											  capabilityFactory)
+														capabilityFactory)
 	{
 		return null;
 	}
 
 	private Map<ResourceLocation, ICapabilityProvider> providers = new TreeMap<ResourceLocation, ICapabilityProvider>(
-			new Comparator<ResourceLocation>()
-			{
-				@Override
-				public int compare(ResourceLocation o1, ResourceLocation o2)
-				{
-					return o1.toString().compareTo(o2.toString());
-				}
-			}
+			Comparator.comparing(ResourceLocation::toString)
 	);
 
 	public Map<ResourceLocation, ICapabilityProvider> getProviders() {return providers;}
@@ -129,6 +122,18 @@ public class ItemFoodAdapter extends ItemFood implements ItemAdapter
 	{
 		this.destroy = destroy;
 		return this;
+	}
+
+	@Override
+	public ItemAdapter setSubTypes(String[] subTypes)
+	{
+		return null;
+	}
+
+	@Override
+	public String[] getSubTypes()
+	{
+		return new String[0];
 	}
 
 	@Override

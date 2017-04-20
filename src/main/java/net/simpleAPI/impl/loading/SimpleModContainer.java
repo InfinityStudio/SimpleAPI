@@ -12,7 +12,6 @@ class SimpleModContainer
 {
 	private String modid;
 	Path root;
-	boolean loadByLocation;
 	private List<RegComponent<?>> components;
 
 	public String getModid()

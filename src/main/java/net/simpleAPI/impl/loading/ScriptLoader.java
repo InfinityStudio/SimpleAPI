@@ -4,10 +4,13 @@ package net.simpleAPI.impl.loading;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.ModMetadata;
 import net.minecraftforge.fml.relauncher.Side;
 import net.simpleAPI.impl.reg.RegComponent;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.Optional;
@@ -31,6 +34,11 @@ public class ScriptLoader
 
 	public void loadAll(Path root)
 	{
+		for (ModContainer container : Loader.instance().getActiveModList())
+		{
+			File source = container.getSource();
+			
+		}
 	}
 
 	public void load(String script)

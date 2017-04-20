@@ -28,23 +28,6 @@ import static java.util.Optional.ofNullable;
  */
 public class ItemFactory implements ComponentFactory
 {
-	@Override
-	public RegComponent<?> createComponent(String modid, String json, Side side)
-	{
-		try
-		{
-			JsonObject obj = new JsonParser().parse(json).getAsJsonObject();
-			Item item = createItem(obj);
-			String id = obj.get("id").getAsString();
-			if (side.isClient() && obj.has("creativeTab"))
-				item.setCreativeTab(find(MCJsonUtil.getString(obj, "creativeTab", null)));
-			item.setUnlocalizedName(modid.concat(".").concat(id)).setRegistryName(modid, id);
-			return new RegItem(item);
-		}
-		catch (Exception e) {e.printStackTrace();}
-		return null;
-	}
-
 	private ItemAdapterBase link(ItemAdapterBase itemAdapter, Object handler)
 	{
 		if (handler == null)
@@ -132,5 +115,21 @@ public class ItemFactory implements ComponentFactory
 				return tabs;
 		//TODO log
 		return CreativeTabs.MISC;
+	}
+
+	@Override
+	public RegComponent<?> createComponent(String modid, JsonObject json, Side side)
+	{
+		try
+		{
+			Item item = createItem(json);
+			String id = json.get("id").getAsString();
+			if (side.isClient() && json.has("creativeTab"))
+				item.setCreativeTab(find(MCJsonUtil.getString(json, "creativeTab", null)));
+			item.setUnlocalizedName(modid.concat(".").concat(id)).setRegistryName(modid, id);
+			return new RegItem(item);
+		}
+		catch (Exception e) {e.printStackTrace();}
+		return null;
 	}
 }
