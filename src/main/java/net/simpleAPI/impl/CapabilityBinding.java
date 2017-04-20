@@ -35,7 +35,7 @@ public enum CapabilityBinding
 		{
 			JsonObject obj = element.getAsJsonObject();
 			String type = MCJsonUtil.getString(obj, "type", null);
-			Capability capability = CapabilitiesFinder.INSTANCE.getCapability(type);
+			Capability capability = CapabilitiesProxy.INSTANCE.getCapability(type);
 			if (capability == null) {continue;}
 			ResourceLocation name = new ResourceLocation(MCJsonUtil.getString(obj, "name", capability.getName()));
 			boolean store = MCJsonUtil.getBool(obj, "store", false);

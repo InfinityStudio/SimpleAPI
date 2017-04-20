@@ -4,6 +4,8 @@
 `type`: The type of the item. See [Types And Properties](#types-and-properties).
  
 `creativeTab`: (**optional**) The creative tab of this item.
+
+`capabilites`: See [Capabilities](Capabilities.md)
  
 ### Types And Properties
 For each type, it could have different properties. 

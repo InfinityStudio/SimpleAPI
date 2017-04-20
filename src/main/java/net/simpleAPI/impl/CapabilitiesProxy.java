@@ -9,12 +9,12 @@ import java.util.IdentityHashMap;
 /**
  * @author ci010
  */
-enum CapabilitiesFinder
+enum CapabilitiesProxy
 {
 	INSTANCE;
 	private IdentityHashMap<String, Capability<?>> providers;
 
-	CapabilitiesFinder()
+	CapabilitiesProxy()
 	{
 		try
 		{
