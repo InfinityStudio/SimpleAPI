@@ -23,6 +23,9 @@ public class SimpleAPI
 			"  \"maxStackSize\": 32\n" +
 			"}";
 
+	@Mod.Instance
+	public static SimpleAPI instance;
+
 	@Mod.EventHandler
 	public void pre(FMLPreInitializationEvent event)
 	{

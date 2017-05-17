@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?meta texturepack='test'?>
+<?req req out player.inventory?>
+<Flow direction="vertical">
+    <Flow background="test">
+        <ProgressBar bind='$progress'/>
+        <Slot bind='$fuel'/>
+        <Slot bind='$out'/>
+        <Slot bind='$container' countInRow='4'/>
+        <TextInput id='inputValue' promptText='userInputString'/>
+        <Text id='localizedPlainText' text="%test.text"/>
+        <Text id='bindText' text="%test.text" src='$progress $size'/>
+        <Button id='button' action="test">
+            <tooltip text="%btn.tooltip"/>
+        </Button>
+        <ModelDisplay target="player"/>
+    </Flow>
+    <Slot bind="$player.inventory" countInRow="9"/>
+</Flow>

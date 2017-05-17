@@ -14,7 +14,7 @@ public interface VarSync<T> extends Var<T>
 
 	interface Listener<T>
 	{
-		<R extends VarSync<T>> void onChange(R value);
+		void onChange(VarSync<T> value);
 	}
 
 	void addListener(Listener<T> listener);

@@ -83,5 +83,8 @@ public class TileEntitySyncHelper implements VarSync.Listener<Object>
 	}
 
 	@Override
-	public <R extends VarSync<Object>> void onChange(R value) {value.writeToNBT(queue);}
+	public void onChange(VarSync<Object> value)
+	{
+		value.writeToNBT(queue);
+	}
 }

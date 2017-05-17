@@ -1,6 +1,5 @@
 import net.simpleAPI.item.ItemCreate;
 import net.simpleAPI.item.ItemUpdate;
-import org.junit.jupiter.api.Test;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -18,7 +17,6 @@ public class EngineTest
 			"var ItemUpdate = Java.type('ItemUpdate');\n" +
 			"var ItemUsing = Java.type('ItemUsing');";
 
-	@Test
 	public void test() throws ScriptException, NoSuchMethodException
 	{
 		ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");

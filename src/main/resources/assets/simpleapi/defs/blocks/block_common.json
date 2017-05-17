@@ -16,19 +16,24 @@
 	  },
 	  "some_int_type": 3
 	},
+
 	"resistance": 100,
 	"hardness": 0.2,
+	"isFireSource": true,
+
 	"material": "ROCK",
+
 	"renderType": "MODEL",
+	"renderLayer": "SOLID",
+
 	"mapColor": "WHITE",
 	"isFullCube": true,
 	"isFullBlock": true,
 	"isOpaqueCube": true,
-	"flammability": 10,
-	"fireSeparateSpeed": 10,
-	"isFireSource": true,
 	"lightOpacity": 10,
 	"lightValue": 10,
+
+
 	"boundingBox": [[0, 0, 0], [1, 1, 1]],
 	"capabilities": [
 	  {
