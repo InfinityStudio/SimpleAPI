@@ -1,8 +1,9 @@
 # Block
 
-````(json)
+```(json)
 {
     "id":"some-id",
     "type": "some-type",
+    
 }
-````
+```
