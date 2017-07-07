@@ -65,13 +65,13 @@ The type `food` indicates that the item is create by Minecraft template of food.
 
 It has these type specific properties:
 
-| Property     | Default Value | Range                                                               | Description                                                                 | Example                                    |
-| ------------ | ------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------ |
-| healAmount   | 0             | Integer from 0-20                                                   | The amount of healing of this food.                                         | 10                                         |
-| saturation   | 0.0           | Float from 0 - 20                                                   | The amount of saturation of this food.                                      | 10                                         |
-| alwaysEdible | false         | Boolean                                                             | If this food can be eaten when player is full.                              | true                                       |
-| isWolfFood   | false         | Boolean                                                             | If this item is can be eaten by food.                                       | true                                       |
-| potionEffect | null          | JSONObject containing effect ResourceLocation and probability float | The potion effect and probability of this potion effect active after eaten. | {effect: minecraft:speed ,probability:0.3} |
+| Property     | Default Value | Range  | Description | Example  |
+| ------------ | ------------- | -------------------------------- |----------------------------------- | ------------------- |
+| healAmount   | 0             | Integer from 0-20   | The amount of healing of this food.     | 10           |
+| saturation   | 0.0           | Float from 0 - 20   | The amount of saturation of this food.   | 10                          |
+| alwaysEdible | false         | Boolean          | If this food can be eaten when player is full.   | true            |
+| isWolfFood   | false         | Boolean  | If this item is can be eaten by food.    | true      |
+| potionEffect | null          | {effect:string, probability:number} | The potion effect and probability of this potion effect active after eaten. | {"effect": "minecraft:speed" ,"probability":0.3} |
 
 ### Creative Tabs
 
