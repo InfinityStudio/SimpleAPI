@@ -26,4 +26,5 @@ All the JSON files in definition folder, should be a JSONArray looked like:
 
 Each component definition should have a property `id` which is unique to others.
 
-[Component definition for items](Item.md) 
+[Capability definition](docs/Capabilities.md)
+[Component definition for items](docs/Item.md)
