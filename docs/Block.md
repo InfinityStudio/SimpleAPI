@@ -46,15 +46,15 @@ Then you could have some other custom states.
 
 The state itself contains several property:
 
-| Property     | Default Value                                     | Range                 | Description                                                                                                       | Example                               |
-| ------------ | ------------------------------------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| material     | No default, required field                        | [Material](#material) | The various material related behavior of block                                                                    | "grass"                               |
-| stepSound    | "stone"                                           | String                | Sets the step sound of a block .                                                                                  | "wood"                                |
-| harvest      | {}                                                | [Harvest](#harvest)   | Provide the harvest behavior of block.                                                                            | {"level": "stone", "tool": "pickaxe"} |
-| lightOpacity | 16                                                | 0-16                  | Sets how much light is subtracted when going through this block This is only used if isOpaqueCube() returns false | 14                                    |
-| lightLevel   | 0.0                                               | 0.0-1.0               | Sets how much light is emitted from the block. 0 means no light.                                                  | 0.5                                   |
-| hardness     | depends on material (stone:1.5; obsidian:50.0)    | All Float             | Sets how long it takes to break the block. Stone:1.5. Obsidian:50.0. Bedrock: -1                                  | 4.0                                   |
-| resistance   | depends on material (stone:10.0; obsidian:2000.0) | All Float             | Sets the block's resistance against explosions                                                                    | 300                                   |
+| Property     | Default Value                                     | Range                   | Description                                                                                                       | Example                               |
+| ------------ | ------------------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| material     | No default, required field                        | [Material](#material)   | The various material related behavior of block                                                                    | "grass"                               |
+| stepSound    | "stone"                                           | [SoundType](#soundtype) | Sets the step sound of a block .                                                                                  | "wood"                                |
+| harvest      | {}                                                | [Harvest](#harvest)     | Provide the harvest behavior of block.                                                                            | {"level": "stone", "tool": "pickaxe"} |
+| lightOpacity | 16                                                | 0-16                    | Sets how much light is subtracted when going through this block This is only used if isOpaqueCube() returns false | 14                                    |
+| lightLevel   | 0.0                                               | 0.0-1.0                 | Sets how much light is emitted from the block. 0 means no light.                                                  | 0.5                                   |
+| hardness     | depends on material (stone:1.5; obsidian:50.0)    | All Float               | Sets how long it takes to break the block. Stone:1.5. Obsidian:50.0. Bedrock: -1                                  | 4.0                                   |
+| resistance   | depends on material (stone:10.0; obsidian:2000.0) | All Float               | Sets the block's resistance against explosions                                                                    | 300                                   |
 
 ### Harvest
 
@@ -135,12 +135,34 @@ largely ref from:
 
 ### SoundType
 
-| name | volume | pitch | break | step  | place | hit | fall |
-| ---- | ------ | ----- | ----- | ----- | ----- | --- | ---- |
-| lava | false  | false | true  | false | 0     |     |      |
+Minecraft have these built-in sound type: (too lazy to fill all the sound event)
 
-### Sound
+| name   | volume | pitch | break | step | place | hit | fall |
+| ------ | ------ | ----- | ----- | ---- | ----- | --- | ---- |
+| wood   | 1      | 1     |       |      |       |     |      |
+| ground | 1      | 1     |       |      |       |     |      |
+| plant  | 1      | 1     |       |      |       |     |      |
+| stone  | 1      | 1     |       |      |       |     |      |
+| glass  | 1      | 1     |       |      |       |     |      |
+| cloth  | 1      | 1     |       |      |       |     |      |
+| sand   | 1      | 1     |       |      |       |     |      |
+| snow   | 1      | 1     |       |      |       |     |      |
+| ladder | 1      | 1     |       |      |       |     |      |
+| anvil  | 0.3    | 1     |       |      |       |     |      |
+| slime  | 1      | 1     |       |      |       |     |      |
 
-| name         | location     |
-| ------------ | ------------ |
-| AMBIENT_CAVE | ambient.cave |
+To register own sound type, create file under the folder def/blocks/sound-types/ with file [soundTyle].json
+
+Then the file format is 
+
+    {
+        "volume": 1.0,
+        "pitch": 1.0,
+        "break": "soundName",
+        "step": "soundName",
+        "place": "soundName",
+        "hit": "soundName",
+        "fall": "soundName"
+    }
+
+To view current built-in sound: [Sounds](Sounds.md)
