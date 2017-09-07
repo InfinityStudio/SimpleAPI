@@ -46,15 +46,17 @@ Then you could have some other custom states.
 
 The state itself contains several property:
 
-| Property     | Default Value                                     | Range                   | Description                                                                                                       | Example                               |
-| ------------ | ------------------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| material     | No default, required field                        | [Material](#material)   | The various material related behavior of block                                                                    | "grass"                               |
-| stepSound    | "stone"                                           | [SoundType](#soundtype) | Sets the step sound of a block .                                                                                  | "wood"                                |
-| harvest      | {}                                                | [Harvest](#harvest)     | Provide the harvest behavior of block.                                                                            | {"level": "stone", "tool": "pickaxe"} |
-| lightOpacity | 16                                                | 0-16                    | Sets how much light is subtracted when going through this block This is only used if isOpaqueCube() returns false | 14                                    |
-| lightLevel   | 0.0                                               | 0.0-1.0                 | Sets how much light is emitted from the block. 0 means no light.                                                  | 0.5                                   |
-| hardness     | depends on material (stone:1.5; obsidian:50.0)    | All Float               | Sets how long it takes to break the block. Stone:1.5. Obsidian:50.0. Bedrock: -1                                  | 4.0                                   |
-| resistance   | depends on material (stone:10.0; obsidian:2000.0) | All Float               | Sets the block's resistance against explosions                                                                    | 300                                   |
+| Property   | Default Value                                     | Range                    | Description                                                                                                       | Example                                             |
+| ---------- | ------------------------------------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| material   | No default, required field                        | [Material](#material)    | The various material related behavior of block                                                                    | "grass"                                             |
+| stepSound  | "stone"                                           | [SoundType](#soundtype)  | Sets the step sound of a block .                                                                                  | "wood"                                              |
+| harvest    | {}                                                | [Harvest](#harvest)      | Provide the harvest behavior of block.                                                                            | {"level": "stone", "tool": "pickaxe"}               |
+| bounding   | [0, 0, 0, 1, 1, 1]                                | 6 doubles                | The outline box of the block                                                                                      | [0, 0, 0, 1, 0.5625, 1]                             |
+| collision  | \[[0, 0, 0, 1, 1, 1]]                             | Array of 6 doubles array | The collision box of the block                                                                                    | \[[0, 0, 0, 0.5, 0.5625, 0.5], [0.6,0.6,0.6,1,1,1]] |
+| opacity    | 16                                                | 0-16                     | Sets how much light is subtracted when going through this block This is only used if isOpaqueCube() returns false | 14                                                  |
+| brightness | 0.0                                               | 0.0-1.0                  | Sets how much light is emitted from the block. 0 means no light.                                                  | 0.5                                                 |
+| hardness   | depends on material (stone:1.5; obsidian:50.0)    | All Float                | Sets how long it takes to break the block. Stone:1.5. Obsidian:50.0. Bedrock: -1                                  | 4.0                                                 |
+| resistance | depends on material (stone:10.0; obsidian:2000.0) | All Float                | Sets the block's resistance against explosions                                                                    | 300                                                 |
 
 ### Harvest
 
@@ -165,4 +167,4 @@ Then the file format is
         "fall": "soundName"
     }
 
-To view current built-in sound: [Sounds](Sounds.md)
+To view current built-in sound: [Sounds](Sounds.md) (NOT DONE YET)
