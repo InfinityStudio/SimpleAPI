@@ -4,6 +4,8 @@
 
 `states`: The property containing [BlockStates](#blockstates) of the block. 
 
+`properties`: The properties of the block.
+
 `capabilites`: An optional property, see [Capabilities](Capabilities.md)
 
 ### BlockStates
