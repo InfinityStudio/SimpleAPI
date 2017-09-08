@@ -16,6 +16,14 @@ This should be identical with other capabilities in the same capability provider
 Some of the capabilities might need this, some of them might not.
 **Notice that this property need the author of capability to support! Normal capability won't support this!**
 
+#### Built-in Capabilities
+
+[Inventory](Inventory.md):
+Provide the inventory capability 
+
+[Attributes](Attributes.md):
+Provide persistance and auto-syncable (between client/server) data
+
 #### Support the capability construct
 
 This is a trick feature since that the Forge default implementation don't provide or allow you to do this.
