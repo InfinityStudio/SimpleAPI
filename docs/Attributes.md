@@ -36,6 +36,26 @@ To make it sync realtime (if you want to show this data like player's hunger or 
         }
     }
 
+To have multiple attributes:
+
+    {
+        "name": "atr-sample",
+        "store": true,
+        "type": "attributes",
+        "construct": {
+            "strength": {
+                "type": "float",
+                "mode": "constantly"
+            },
+            "mana": {
+                "type": "float",
+                "mode": "constantly"
+            }
+        }
+    }
+
+This add one more attribute named `mana`
+
 To change the type of data, just change the `type` property:
 
     {
