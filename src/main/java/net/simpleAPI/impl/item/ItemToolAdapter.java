@@ -26,8 +26,7 @@ import java.util.Set;
 /**
  * @author ci010
  */
-public class ItemToolAdapter extends ItemTool implements ItemAdapter
-{
+public class ItemToolAdapter extends ItemTool implements ItemAdapter {
 	public ItemToolAdapter(float attackDamageIn, float attackSpeedIn, ToolMaterial materialIn, Set<Block>
 			effectiveBlocksIn)
 	{
@@ -73,10 +72,10 @@ public class ItemToolAdapter extends ItemTool implements ItemAdapter
 	}
 
 	@SubscribeEvent
-	public void bindCapability(AttachCapabilitiesEvent<Item> event)
+	public void bindCapability(AttachCapabilitiesEvent<ItemStack> event)
 	{
-		if (event.getObject() != this) return;
-		Map<ResourceLocation, ICapabilityProvider> caps = getCapabilityFactory().apply(((AttachCapabilitiesEvent.Item) event).getItemStack());
+		if (event.getObject().getItem() != this) return;
+		Map<ResourceLocation, ICapabilityProvider> caps = getCapabilityFactory().apply((event).getObject());
 		if (caps == null) return;
 		for (Map.Entry<ResourceLocation, ICapabilityProvider> entry : caps.entrySet())
 			event.addCapability(entry.getKey(), entry.getValue());

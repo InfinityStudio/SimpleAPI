@@ -1,12 +1,13 @@
 package net.simpleAPI.attributes;
 
+import net.minecraft.entity.Entity;
+
 import javax.annotation.Nonnull;
 
 /**
  * @author ci010
  */
-public interface AttributeFactory
-{
+public interface AttributeFactory {
 	/**
 	 * Create a new variable for number.
 	 *
@@ -23,4 +24,12 @@ public interface AttributeFactory
 	Var<String> newString(@Nonnull String name, @Nonnull String s, UpdateMode mode);
 
 	<T extends Enum<T>> Var<T> newEnum(@Nonnull String name, @Nonnull T e, UpdateMode mode);
+
+	AttributeView build();
+
+	static AttributeFactory create(Object o) {
+		if (o instanceof Entity)
+			return new EntityVarFactory((Entity) o);
+		return new CommonAttributeFactory();
+	}
 }

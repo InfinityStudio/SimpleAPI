@@ -35,8 +35,8 @@ public class RegItem extends RegComponent<Item>
 	@Override
 	public void register()
 	{
-		GameRegistry.register(getComponent());
-		if (ore != null) OreDictionary.registerOre(ore, getComponent());
+//		GameRegistry.register(getComponent());
+//		if (ore != null) OreDictionary.registerOre(ore, getComponent());
 	}
 
 	@Override

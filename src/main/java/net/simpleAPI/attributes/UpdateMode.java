@@ -1,6 +1,8 @@
 package net.simpleAPI.attributes;
 
 /**
+ * Represent the update mode of the attributes.
+ *
  * The {@link #CONSTANTLY} means it will update to client as soon as the value changed. Normally, the value
  * needed to be showed in gui hub({@link net.minecraft.client.gui.GuiIngame}), or the value could affect the
  * common render condition should choose this mode.

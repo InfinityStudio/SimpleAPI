@@ -11,11 +11,12 @@ import javax.annotation.Nonnull;
 /**
  * @author ci010
  */
-public interface AttributeView extends Overview<VarSync<?>>
-{
+public interface AttributeView extends Overview<Var<?>> {
 	@CapabilityInject(AttributeView.class)
 	Capability<AttributeView> CAPABILITY = null;
 
+	Capability.IStorage<AttributeView> CAPABILITY_STORAGE = AttriImpl.STORAGE;
+
 	@Nonnull
-	ImmutableList<VarSync<?>> getVarsByMode(@Nonnull UpdateMode mode);
+	ImmutableList<Var<?>> getVarsByMode(@Nonnull UpdateMode mode);
 }

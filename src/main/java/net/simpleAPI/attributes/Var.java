@@ -15,5 +15,16 @@ public interface Var<T> extends Supplier<T>
 	 * @return The data string.
 	 */
 	String toString();
+
+	UpdateMode getUpdateMode();
+
+	interface Listener<T>
+	{
+		void onChange(Var<T> value);
+	}
+
+	void addListener(Listener<T> listener);
+
+	void removeListener(Listener<T> listener);
 }
 

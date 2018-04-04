@@ -1,4 +1,4 @@
-package net.simpleAPI.impl.attribute;
+package net.simpleAPI.attributes;
 
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * @author ci010
  */
-public class DataSerializersAddon
+class DataSerializersAddon
 {
 	public static final DataSerializer<Long> LONG;
 	public static final DataSerializer<Short> SHORT;
@@ -34,7 +34,12 @@ public class DataSerializersAddon
 			}
 
 			@Override
-			public DataParameter<Long> createKey(int id) {return new DataParameter<Long>(id, this);}
+			public DataParameter<Long> createKey(int id) {return new DataParameter<>(id, this);}
+
+			@Override
+			public Long copyValue(Long value) {
+				return new Long(value);
+			}
 		});
 		DataSerializers.registerSerializer(SHORT = new DataSerializer<Short>()
 		{
@@ -53,7 +58,12 @@ public class DataSerializersAddon
 			@Override
 			public DataParameter<Short> createKey(int id)
 			{
-				return new DataParameter<Short>(id, this);
+				return new DataParameter<>(id, this);
+			}
+
+			@Override
+			public Short copyValue(Short value) {
+				return new Short(value);
 			}
 		});
 		DataSerializers.registerSerializer(DOUBLE = new DataSerializer<Double>()
@@ -73,7 +83,12 @@ public class DataSerializersAddon
 			@Override
 			public DataParameter<Double> createKey(int id)
 			{
-				return new DataParameter<Double>(id, this);
+				return new DataParameter<>(id, this);
+			}
+
+			@Override
+			public Double copyValue(Double value) {
+				return new Double(value);
 			}
 		});
 		DataSerializers.registerSerializer(CHARACTER = new DataSerializer<Character>()
@@ -93,7 +108,12 @@ public class DataSerializersAddon
 			@Override
 			public DataParameter<Character> createKey(int id)
 			{
-				return new DataParameter<Character>(id, this);
+				return new DataParameter<>(id, this);
+			}
+
+			@Override
+			public Character copyValue(Character value) {
+				return new Character(value);
 			}
 		});
 	}

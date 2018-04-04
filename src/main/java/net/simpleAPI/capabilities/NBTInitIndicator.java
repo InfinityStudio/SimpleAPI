@@ -1,9 +1,8 @@
-package net.simpleAPI.impl.attribute;
+package net.simpleAPI.capabilities;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagEnd;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.simpleAPI.capabilities.InitIndicator;
 
 /**
  * @author ci010

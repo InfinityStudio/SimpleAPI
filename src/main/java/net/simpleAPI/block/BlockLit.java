@@ -1,6 +1,5 @@
 package net.simpleAPI.block;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
@@ -22,6 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.property.IUnlistedProperty;
 
 import javax.annotation.Nonnull;
+import java.util.Optional;
 
 /**
  * @author ci010

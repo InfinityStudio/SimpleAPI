@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.simpleAPI.capabilities.Capabilities;
-import net.simpleAPI.impl.attribute.NBTInitIndicator;
+import net.simpleAPI.capabilities.NBTInitIndicator;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

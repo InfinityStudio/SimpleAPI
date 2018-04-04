@@ -9,6 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.simpleAPI.attributes.AttributeView;
 import net.simpleAPI.attributes.UpdateMode;
+import net.simpleAPI.attributes.Var;
 import net.simpleAPI.attributes.VarSync;
 
 /**
@@ -19,7 +20,7 @@ public class ContainerAdapter extends Container
 	public ContainerAdapter(EntityPlayer player, ICapabilityProvider provider, boolean displayPlayerInventory)
 	{
 		AttributeView capability = provider.getCapability(AttributeView.CAPABILITY, null);
-		ImmutableList<VarSync<?>> varsByMode = capability.getVarsByMode(UpdateMode.LAZY);
+		ImmutableList<Var<?>> varsByMode = capability.getVarsByMode(UpdateMode.LAZY);
 		VarSync.Listener listener = value ->
 		{
 			for (IContainerListener l : listeners)
@@ -27,11 +28,11 @@ public class ContainerAdapter extends Container
 				{
 					EntityPlayer p = (EntityPlayer) l;
 					NBTTagCompound tagCompound = new NBTTagCompound();
-					value.writeToNBT(tagCompound);
+//					value.writeToNBT(tagCompound);
 					//network.sendPacket(player, new UpdatePacket(windowId, tagCompound));
 				}
 		};
-		for (VarSync<?> sync : varsByMode)
+		for (Var<?> sync : varsByMode)
 			sync.addListener(listener);//listen server side
 	}
 

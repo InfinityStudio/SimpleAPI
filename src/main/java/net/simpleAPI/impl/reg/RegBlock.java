@@ -30,7 +30,7 @@ public class RegBlock extends RegComponent<Block>
 	@Override
 	public void register()
 	{
-		GameRegistry.register(getComponent());
+//		GameRegistry.register(getComponent());
 		if (ore != null)
 			OreDictionary.registerOre(ore, getComponent());
 	}
@@ -41,7 +41,7 @@ public class RegBlock extends RegComponent<Block>
 		Block block = getComponent();
 		Item item = Item.getItemFromBlock(block);
 		NonNullList<ItemStack> stacks = NonNullList.create();
-		block.getSubBlocks(item, item.getCreativeTab(), stacks);
+//		block.getSubBlocks(item, item.getCreativeTab(), stacks);
 		for (int i = 0; i < stacks.size(); i++)
 			ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(block.getRegistryName
 					(), "inventory"));

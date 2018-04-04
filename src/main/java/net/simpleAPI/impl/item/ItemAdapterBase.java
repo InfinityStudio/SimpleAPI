@@ -68,10 +68,10 @@ public class ItemAdapterBase extends Item implements ItemAdapter
 	}
 
 	@SubscribeEvent
-	public void bindCapability(AttachCapabilitiesEvent<Item> event)
+	public void bindCapability(AttachCapabilitiesEvent<ItemStack> event)
 	{
-		if (event.getObject() != this) return;
-		Map<ResourceLocation, ICapabilityProvider> caps = getCapabilityFactory().apply(((AttachCapabilitiesEvent.Item) event).getItemStack());
+		if (event.getObject().getItem() != this) return;
+		Map<ResourceLocation, ICapabilityProvider> caps = getCapabilityFactory().apply(event.getObject());
 		if (caps == null) return;
 		for (Map.Entry<ResourceLocation, ICapabilityProvider> entry : caps.entrySet())
 			event.addCapability(entry.getKey(), entry.getValue());

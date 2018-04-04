@@ -87,7 +87,7 @@ public class Capabilities
 		public Builder<T> append(T instance, EnumFacing... facings)
 		{
 			Preconditions.checkNotNull(instance);
-			if (facings == null)
+			if (facings == null || facings.length == 0)
 				if (instances.isEmpty())
 					if (single == null)
 						single = instance;

@@ -1,11 +1,7 @@
-package net.simpleAPI.impl.attribute;
+package net.simpleAPI.attributes;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
-import net.simpleAPI.attributes.AttributeFactory;
-import net.simpleAPI.attributes.UpdateMode;
-import net.simpleAPI.attributes.Var;
-import net.simpleAPI.attributes.VarSync;
 
 import javax.annotation.Nonnull;
 import java.util.Map;
@@ -13,26 +9,25 @@ import java.util.Map;
 /**
  * @author ci010
  */
-public class CommonAttributeFactory implements AttributeFactory
-{
-	protected Map<String, VarSync<?>> constantly = Maps.newHashMap(), lazy = Maps.newHashMap();
+class CommonAttributeFactory implements AttributeFactory {
+	Map<String, Var<?>> constantly = Maps.newHashMap(), lazy = Maps.newHashMap();
 
-	public Map<String, VarSync<?>> getConstantly() {return constantly;}
+	public Map<String, Var<?>> getConstantly() {return constantly;}
 
-	public Map<String, VarSync<?>> getLazy() {return lazy;}
+	public Map<String, Var<?>> getLazy() {return lazy;}
 
 	private <T> Var<T> newVar(String name, UpdateMode mode, T v)
 	{
 		Preconditions.checkNotNull(v, "The default value cannot be null!");
 		Preconditions.checkNotNull(name, "The variable's name cannot be null!");
 		if (mode == null) mode = UpdateMode.LAZY;
-		VarSync<T> var = produceVar(name, mode, v);
+		Var<T> var = produceVar(name, mode, v);
 		if (mode == UpdateMode.CONSTANTLY) constantly.put(name, var);
 		else lazy.put(name, var);
 		return var;
 	}
 
-	protected <T> VarSync<T> produceVar(String name, UpdateMode mode, T v) {return new VarSyncPrimitive<T>(name, v, mode);}
+	protected <T> Var<T> produceVar(String name, UpdateMode mode, T v) {return new VarSyncPrimitive<>(name, v, mode);}
 
 	@Override
 	public <T extends Number> Var<T> newNumber(@Nonnull String name, @Nonnull T v, UpdateMode mode) {return newVar(name, mode, v);}
@@ -65,5 +60,10 @@ public class CommonAttributeFactory implements AttributeFactory
 		if (mode == UpdateMode.CONSTANTLY) constantly.put(name, v);
 		else lazy.put(name, v);
 		return v;
+	}
+
+	@Override
+	public AttributeView build() {
+		return new AttriImpl(this.constantly, this.lazy);
 	}
 }
